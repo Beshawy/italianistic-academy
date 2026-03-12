@@ -117,28 +117,47 @@ const Navbar = () => {
               className="fixed inset-0 z-[99997] bg-black/80 md:hidden backdrop-blur-md"
             />
             
-            {/* Drawer (STRICTLY SOLID WHITE) */}
+            {/* Drawer (ENHANCED PREMIUM DESIGN) */}
             <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              initial={{ x: '100%', opacity: 0.5 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '100%', opacity: 0.5 }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              style={{ backgroundColor: '#FFFFFF', opacity: 1, zIndex: 100000 }}
-              className="fixed inset-y-0 right-0 w-full max-w-[280px] md:hidden shadow-2xl flex flex-col pt-4 overflow-y-auto pointer-events-auto"
+              style={{ zIndex: 100000 }}
+              className="fixed inset-y-0 right-0 w-full max-w-[280px] md:hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col pt-4 overflow-y-auto pointer-events-auto bg-slate-950 border-l border-white/10"
             >
+              {/* Shining Shimmer Effect Overlay */}
+              <motion.div 
+                animate={{ 
+                  x: ['-200%', '200%'],
+                  opacity: [0, 0.2, 0]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "linear",
+                  repeatDelay: 3
+                }}
+                className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none skew-x-[-20deg]"
+              />
+
+              {/* Ambient Glows */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] pointer-events-none rounded-full" />
+              <div className="absolute bottom-40 left-0 w-40 h-40 bg-secondary/10 blur-[80px] pointer-events-none rounded-full" />
+
               {/* Menu Header - CLOSE BUTTON ONLY (Moves with scroll) */}
-              <div className="px-6 py-4 flex justify-between items-center relative bg-white z-[100001]">
+              <div className="px-6 py-4 flex justify-between items-center relative z-[100001]">
                 <div /> {/* Spacer to push X to the end if needed, or handled by dir */}
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="p-3 rounded-full hover:bg-muted transition-all duration-200 group"
+                  className="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group shadow-lg sm:p-4"
                   aria-label="Close menu"
                 >
-                  <X className="w-7 h-7 text-black transition-transform group-hover:rotate-90" strokeWidth={2.5} />
+                  <X className="w-7 h-7 text-white transition-transform group-hover:rotate-90 group-hover:scale-110" strokeWidth={2.5} />
                 </button>
               </div>
 
-              <div className="flex flex-col px-2 mb-8 bg-white">
+              <div className="flex flex-col px-4 mb-8 relative z-10">
                 {links.map((link, i) => (
                   <motion.div
                     key={link.to}
@@ -149,29 +168,36 @@ const Navbar = () => {
                     <Link
                       to={link.to}
                       onClick={() => setMobileOpen(false)}
-                      className={`block w-full text-start px-8 py-4 text-lg font-bold transition-all duration-300 ${
+                      className={`block w-full text-start px-8 py-4 text-xl font-bold transition-all duration-300 relative group overflow-hidden rounded-2xl ${
                         isActive(link.to) 
-                          ? 'text-primary' 
-                          : 'text-heading hover:text-primary'
+                          ? 'text-white' 
+                          : 'text-white/70 hover:text-white'
                       }`}
                     >
-                      {link.label}
+                      {/* Active/Hover Background Glow */}
+                      {(isActive(link.to)) && (
+                        <motion.div 
+                          layoutId="activeNavMobile"
+                          className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent z-0"
+                        />
+                      )}
+                      <span className="relative z-10 block transform transition-transform group-hover:translate-x-2">{link.label}</span>
                     </Link>
                   </motion.div>
                 ))}
               </div>
 
               {/* Language Switcher */}
-              <div className="mt-auto px-8 py-10 bg-slate-100 border-t border-border/50">
-                <div className="flex flex-col gap-2">
+              <div className="mt-auto px-6 py-10 bg-white/5 border-t border-white/10 relative z-10 backdrop-blur-sm">
+                <div className="flex flex-col gap-3">
                   {(Object.keys(localeLabels) as Locale[]).map((l) => (
                     <button
                       key={l}
                       onClick={() => { setLocale(l); setMobileOpen(false); }}
-                      className={`text-start px-4 py-3 rounded-xl transition-all font-bold ${
+                      className={`text-start px-5 py-4 rounded-2xl transition-all font-bold border ${
                         locale === l 
-                          ? 'bg-heading text-white shadow-lg' 
-                          : 'text-heading/60 hover:text-heading hover:bg-white'
+                          ? 'bg-primary text-white shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] border-primary' 
+                          : 'text-white/60 hover:text-white hover:bg-white/10 border-transparent hover:border-white/10'
                       }`}
                     >
                       {localeLabels[l]}

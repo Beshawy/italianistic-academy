@@ -130,7 +130,7 @@ const Footer = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="mt-12 pt-8 border-t border-primary-foreground/10 flex flex-col sm:flex-row items-center justify-between gap-4"
         >
-          <p className="text-xs text-primary-foreground/50">{t('footer.rights')}</p>
+          <p className="text-xs text-primary-foreground/50">© 2026 Italianista Academy. All rights reserved.</p>
           <motion.a
             whileHover={{ scale: 1.1, color: "var(--primary)" }}
             href="https://www.facebook.com/ITALIANISTA77/"

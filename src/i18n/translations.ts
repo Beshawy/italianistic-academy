@@ -113,7 +113,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.description': 'Italianista Academy — Your gateway to mastering the Italian language since 2013.',
     'footer.quickLinks': 'Quick Links',
     'footer.contactInfo': 'Contact Info',
-    'footer.rights': '© 2024 Italianista Academy. All rights reserved.',
+    'footer.rights': '© 2026 Italianista Academy. All rights reserved.',
   },
 
   ar: {
@@ -217,7 +217,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.description': 'أكاديمية إيطاليانيستا — بوابتك لإتقان اللغة الإيطالية منذ 2013.',
     'footer.quickLinks': 'روابط سريعة',
     'footer.contactInfo': 'معلومات الاتصال',
-    'footer.rights': '© 2024 أكاديمية إيطاليانيستا. جميع الحقوق محفوظة.',
+    'footer.rights': '© 2026 أكاديمية إيطاليانيستا. جميع الحقوق محفوظة.',
   },
 
   it: {
@@ -321,6 +321,6 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.description': 'Italianista Academy — La tua porta per padroneggiare la lingua italiana dal 2013.',
     'footer.quickLinks': 'Link Rapidi',
     'footer.contactInfo': 'Info Contatto',
-    'footer.rights': '© 2024 Italianista Academy. Tutti i diritti riservati.',
+    'footer.rights': '© 2026 Italianista Academy. Tutti i diritti riservati.',
   },
 };
