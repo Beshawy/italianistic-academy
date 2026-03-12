@@ -126,8 +126,9 @@ const Navbar = () => {
               style={{ backgroundColor: '#FFFFFF', opacity: 1, zIndex: 100000 }}
               className="fixed inset-y-0 right-0 w-full max-w-[280px] md:hidden shadow-2xl flex flex-col pt-4 overflow-y-auto pointer-events-auto"
             >
-              {/* Menu Header - CLOSE BUTTON ONLY (Replaces Logo) */}
-              <div className="px-6 py-4 flex justify-end items-center sticky top-0 bg-white z-[100001]">
+              {/* Menu Header - CLOSE BUTTON ONLY (Moves with scroll) */}
+              <div className="px-6 py-4 flex justify-between items-center relative bg-white z-[100001]">
+                <div /> {/* Spacer to push X to the end if needed, or handled by dir */}
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="p-3 rounded-full hover:bg-muted transition-all duration-200 group"
@@ -148,7 +149,7 @@ const Navbar = () => {
                     <Link
                       to={link.to}
                       onClick={() => setMobileOpen(false)}
-                      className={`block w-full text-end px-8 py-4 text-lg font-bold transition-all duration-300 ${
+                      className={`block w-full text-start px-8 py-4 text-lg font-bold transition-all duration-300 ${
                         isActive(link.to) 
                           ? 'text-primary' 
                           : 'text-heading hover:text-primary'
@@ -162,15 +163,12 @@ const Navbar = () => {
 
               {/* Language Switcher */}
               <div className="mt-auto px-8 py-10 bg-slate-100 border-t border-border/50">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-6 font-black text-end">
-                  {t('nav.language')}
-                </div>
                 <div className="flex flex-col gap-2">
                   {(Object.keys(localeLabels) as Locale[]).map((l) => (
                     <button
                       key={l}
                       onClick={() => { setLocale(l); setMobileOpen(false); }}
-                      className={`text-end px-4 py-3 rounded-xl transition-all font-bold ${
+                      className={`text-start px-4 py-3 rounded-xl transition-all font-bold ${
                         locale === l 
                           ? 'bg-heading text-white shadow-lg' 
                           : 'text-heading/60 hover:text-heading hover:bg-white'
