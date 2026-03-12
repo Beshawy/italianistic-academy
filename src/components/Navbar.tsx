@@ -117,90 +117,86 @@ const Navbar = () => {
               className="fixed inset-0 z-[99997] bg-black/80 md:hidden backdrop-blur-md"
             />
             
-            {/* Drawer (ENHANCED PREMIUM DESIGN) */}
+            {/* Drawer — LUXURY DARK GLASSMORPHISM */}
             <motion.div
-              initial={{ x: '100%', opacity: 0.5 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0.5 }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              style={{ zIndex: 100000 }}
-              className="fixed inset-y-0 right-0 w-full max-w-[280px] md:hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col pt-4 overflow-y-auto pointer-events-auto bg-slate-950 border-l border-white/10"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: "tween", duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+              style={{ 
+                zIndex: 100000,
+                background: 'rgba(30, 30, 40, 0.25)',
+                backdropFilter: 'blur(32px)',
+                WebkitBackdropFilter: 'blur(32px)',
+              }}
+              className="fixed inset-y-0 right-0 w-full max-w-[300px] md:hidden flex flex-col border-l border-white/[0.06] shadow-[inset_-1px_0_0_rgba(255,255,255,0.05)] overflow-y-auto"
             >
-              {/* Shining Shimmer Effect Overlay */}
-              <motion.div 
-                animate={{ 
-                  x: ['-200%', '200%'],
-                  opacity: [0, 0.2, 0]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatDelay: 3
-                }}
-                className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none skew-x-[-20deg]"
-              />
+              {/* Cinematic Ambient Glows (very subtle) */}
+              <div className="absolute top-[-60px] right-[-60px] w-[220px] h-[220px] bg-white/[0.03] rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute bottom-[100px] left-[-80px] w-[260px] h-[260px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
-              {/* Ambient Glows */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] pointer-events-none rounded-full" />
-              <div className="absolute bottom-40 left-0 w-40 h-40 bg-secondary/10 blur-[80px] pointer-events-none rounded-full" />
-
-              {/* Menu Header - CLOSE BUTTON ONLY (Moves with scroll) */}
-              <div className="px-6 py-4 flex justify-between items-center relative z-[100001]">
-                <div /> {/* Spacer to push X to the end if needed, or handled by dir */}
+              {/* Top Bar — Close Button */}
+              <div className="flex items-center justify-end px-7 pt-8 pb-4 relative z-10">
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group shadow-lg sm:p-4"
+                  className="w-10 h-10 flex items-center justify-center text-white/40 hover:text-white transition-all duration-300 hover:rotate-90 group"
                   aria-label="Close menu"
                 >
-                  <X className="w-7 h-7 text-white transition-transform group-hover:rotate-90 group-hover:scale-110" strokeWidth={2.5} />
+                  <X className="w-6 h-6" strokeWidth={1.5} />
                 </button>
               </div>
 
-              <div className="flex flex-col px-4 mb-8 relative z-10">
+              {/* Thin Decorative Top Line */}
+              <div className="mx-7 h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent mb-10" />
+
+              {/* Navigation Links — Luxury Typography */}
+              <nav className="flex flex-col px-7 gap-0.5 flex-1 relative z-10">
                 {links.map((link, i) => (
                   <motion.div
                     key={link.to}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 + 0.1 }}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.06 + 0.1, duration: 0.4 }}
                   >
                     <Link
                       to={link.to}
                       onClick={() => setMobileOpen(false)}
-                      className={`block w-full text-start px-8 py-4 text-xl font-bold transition-all duration-300 relative group overflow-hidden rounded-2xl ${
-                        isActive(link.to) 
-                          ? 'text-white' 
-                          : 'text-white/70 hover:text-white'
+                      className={`group flex items-center justify-between py-5 border-b transition-all duration-300 ${
+                        isActive(link.to)
+                          ? 'border-white/20 text-white'
+                          : 'border-white/[0.06] text-white/50 hover:text-white hover:border-white/15'
                       }`}
                     >
-                      {/* Active/Hover Background Glow */}
-                      {(isActive(link.to)) && (
-                        <motion.div 
-                          layoutId="activeNavMobile"
-                          className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent z-0"
-                        />
-                      )}
-                      <span className="relative z-10 block transform transition-transform group-hover:translate-x-2">{link.label}</span>
+                      <span className="text-sm font-semibold tracking-[0.2em] uppercase">
+                        {link.label}
+                      </span>
+                      <motion.span
+                        animate={{ opacity: isActive(link.to) ? 1 : 0, x: isActive(link.to) ? 0 : -5 }}
+                        className="text-white/30 text-xs"
+                      >
+                        ●
+                      </motion.span>
                     </Link>
                   </motion.div>
                 ))}
-              </div>
+              </nav>
 
-              {/* Language Switcher */}
-              <div className="mt-auto px-6 py-10 bg-white/5 border-t border-white/10 relative z-10 backdrop-blur-sm">
-                <div className="flex flex-col gap-3">
+              {/* Bottom — Language Switcher */}
+              <div className="px-7 pb-12 pt-8 relative z-10">
+                <div className="h-[1px] bg-gradient-to-r from-white/10 via-white/5 to-transparent mb-8" />
+                <p className="text-[10px] uppercase tracking-[0.25em] text-white/25 mb-5">Language</p>
+                <div className="flex gap-4">
                   {(Object.keys(localeLabels) as Locale[]).map((l) => (
                     <button
                       key={l}
                       onClick={() => { setLocale(l); setMobileOpen(false); }}
-                      className={`text-start px-5 py-4 rounded-2xl transition-all font-bold border ${
-                        locale === l 
-                          ? 'bg-primary text-white shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] border-primary' 
-                          : 'text-white/60 hover:text-white hover:bg-white/10 border-transparent hover:border-white/10'
+                      className={`text-xs tracking-widest uppercase font-semibold transition-all duration-300 ${
+                        locale === l
+                          ? 'text-white border-b border-white/40 pb-0.5'
+                          : 'text-white/30 hover:text-white/60'
                       }`}
                     >
-                      {localeLabels[l]}
+                      {l.toUpperCase()}
                     </button>
                   ))}
                 </div>
